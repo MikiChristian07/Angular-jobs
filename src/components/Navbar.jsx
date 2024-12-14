@@ -1,5 +1,7 @@
 import React from 'react'
 
+import logo from '../assets/imgs/angular_logo.png'
+
 const Navbar = () => {
     return (
         <nav className="bg-red-700 border-b border-red-500">
@@ -10,7 +12,7 @@ const Navbar = () => {
                         <a className="flex flex-shrink-0 items-center mr-4" href="/index.html">
                             <img
                                 className="h-10 w-auto"
-                                src="images/logo.png"
+                                src={logo}
                                 alt="Angular Jobs"
                             />
                             <span className="hidden md:block text-white text-2xl font-bold ml-2">Angular Jobs</span>
