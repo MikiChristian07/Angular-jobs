@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
+import Jobspage from './pages/Jobspage';
 const App = () => {
 
 
@@ -14,8 +15,8 @@ const App = () => {
           {/*Routes under MainLayout will share the Navabr and other components*/}
           <Route path='/' element={<MainLayout />}>
             <Route index element={<HomePage />} />
-            {/* <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/jobs" element={<Jobspage />} />
+            {/* <Route path="/contact" element={<Contact />} /> */}
             {/* Catch-all route for unmatched paths */}
             {/* <Route path="*" element={<NotFound />} /> */} 
           </Route>

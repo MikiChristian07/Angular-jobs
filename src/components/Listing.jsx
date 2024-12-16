@@ -1,5 +1,6 @@
 // import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FaMapMarker } from 'react-icons/fa';
 
@@ -41,12 +42,12 @@ const Listing = ({ job }) => {
             </div>
           )}
           {job.id && (
-            <a
-              href={`/job/${job.id}`}
+            <Link
+              to={`/job/${job.id}`}
               className="h-[36px] bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-center text-sm"
             >
               Read More
-            </a>
+            </Link>
           )}
         </div>
       </div>
