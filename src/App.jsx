@@ -1,37 +1,31 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
-import Jobspage from './pages/Jobspage';
+import JobsPage from './pages/JobsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import JobPage, { jobLoader } from './pages/JobPage';
 
+// Define the routes using createBrowserRouter
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <MainLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'jobs', element: <JobsPage /> },
+      {
+        path: 'jobs/:id',
+        element: <JobPage />,
+        loader: jobLoader, // Attach the loader here
+      },
+      { path: '*', element: <NotFoundPage /> },
+    ],
+  },
+]);
 
 const App = () => {
-  return (
-    
-    <Router>
-        {/* Define Routes */}
-        <Routes>
-          {/*Routes under MainLayout will share the Navabr and other components*/}
-          <Route path='/' element={<MainLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="/jobs" element={<Jobspage />} />
-            <Route path="*" element={<NotFoundPage />} /> 
-            {/* <Route path="/contact" element={<Contact />} /> */}
-            {/* Catch-all route for unmatched paths */}
-            {/* <Route path="*" element={<NotFound />} /> */} 
-          </Route>
-        </Routes>
-    </Router>
-  )
-}
+  return <RouterProvider router={router} />;
+};
 
 export default App;
-
-{/* <>
-      <Navbar />
-      <Hero title="Become an Angular Dev" />
-      <HomeCards />
-      <JobListings />
-      <ViewAllJobs />
-    </> */}
