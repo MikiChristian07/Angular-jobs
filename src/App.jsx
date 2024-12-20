@@ -8,11 +8,38 @@ import JobPage, { jobLoader } from './pages/JobPage';
 import AddJobPage from './pages/AddJobPage';
 
 const App = () => {
+  // Fixing the typo in the `addJob` function to add a new job
+  const addJob = async (newJob) => {
+    const res = await fetch('/api/jobs', {
+      method: 'POST', // Corrected from 'methods' to 'method'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newJob),
+    });
 
-  const addJob = (newJob) => {
-    console.log(newJob);
+    if (!res.ok) {
+      console.error('Failed to add the job:', res.statusText);
+      return;
+    }
+
+    return await res.json(); // Return the result if needed
+  };
+
+  // Function to delete a job 
+  const deleteJob = async (id) => {
+    const res = await fetch(`/api/jobs/${id}`, {
+      method: 'DELETE', // Corrected from 'methods' to 'method'
+    });
+
+    if (!res.ok) {
+      console.error('Failed to delete the job:', res.statusText);
+      return;
+    }
+
+    return await res.json(); // Return the result if needed
   }
-  
+
   // Define the routes using createBrowserRouter
   const router = createBrowserRouter([
     {
@@ -21,20 +48,21 @@ const App = () => {
       children: [
         { index: true, element: <HomePage /> },
         { path: 'jobs', element: <JobsPage /> },
-        { path: 'add-job', element: <AddJobPage addJobSubmit={addJob} /> },
+        { 
+          path: 'add-job', 
+          element: <AddJobPage addJobSubmit={addJob} /> 
+        },
         {
           path: 'jobs/:id',
-          element: <JobPage />,
+          element: <JobPage deleteJob={ deleteJob } />,
           loader: jobLoader, // Attach the loader here
         },
         { path: '*', element: <NotFoundPage /> },
       ],
     },
   ]);
-  
 
   return <RouterProvider router={router} />;
-  
 };
 
 export default App;
