@@ -121,4 +121,5 @@ const jobLoader = async ({ params }) => {
     }
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { JobPage as default, jobLoader };
